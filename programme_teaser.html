@@ -1,0 +1,751 @@
+<!-- ============================================================
+     ENLIT AFRICA 2026 — PROGRAMME TEASER MODULE
+     Drop-in HTML/CSS/JS. All styles + scripts scoped under
+     .ea-prog-teaser to avoid clashing with site styles.
+     Designed to sit above the "View full programme" CTA.
+     ============================================================ -->
+<section class="ea-prog-teaser" id="ea-prog-teaser">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+    .ea-prog-teaser {
+      --ea-ink: #0a1628;
+      --ea-ink-2: #2a3950;
+      --ea-mute: #6b7a90;
+      --ea-line: #e4e8ef;
+      --ea-line-2: #f1f3f7;
+      --ea-bg: #ffffff;
+      --ea-bg-soft: #f7f9fc;
+      --ea-yellow: #ffd200;
+      --ea-yellow-deep: #f5c000;
+      --ea-navy: #0a1628;
+      --ea-radius: 4px;
+      --ea-radius-lg: 8px;
+      --ea-shadow-sm: 0 1px 2px rgba(10,22,40,.04), 0 0 0 1px rgba(10,22,40,.04);
+      --ea-shadow-md: 0 4px 16px rgba(10,22,40,.08), 0 0 0 1px rgba(10,22,40,.04);
+      --ea-shadow-lg: 0 12px 40px rgba(10,22,40,.16);
+      font-family: "Montserrat", sans-serif;
+      color: var(--ea-ink);
+      background: var(--ea-bg);
+      line-height: 1.5;
+      box-sizing: border-box;
+    }
+    .ea-prog-teaser *, .ea-prog-teaser *::before, .ea-prog-teaser *::after { box-sizing: border-box; }
+    .ea-wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Section frame ---------- */
+    .ea-section { padding: 64px 0; }
+    .ea-section + .ea-section { padding-top: 0; }
+    .ea-section-head { margin-bottom: 32px; max-width: 760px; }
+    .ea-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--ea-mute); margin-bottom: 12px;
+    }
+    .ea-eyebrow::before { content: ""; width: 28px; height: 2px; background: var(--ea-yellow); display: inline-block; }
+    .ea-h2 {
+      font-size: clamp(28px, 3.4vw, 40px);
+      font-weight: 700; letter-spacing: -0.02em; margin: 0; line-height: 1.1;
+    }
+    .ea-h2 em { font-style: normal; color: var(--ea-mute); font-weight: 400; }
+    .ea-section-sub { color: var(--ea-mute); font-size: 16px; margin: 12px 0 0; max-width: 640px; }
+
+    /* ---------- Headline draws (keynotes + breakfast) ---------- */
+    .ea-draws { display: grid; grid-template-columns: 1.4fr 1.4fr 1fr; gap: 16px; }
+    @media (max-width: 1000px) { .ea-draws { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 700px) { .ea-draws { grid-template-columns: 1fr; } }
+
+    .ea-draw {
+      position: relative; border-radius: var(--ea-radius-lg); overflow: hidden;
+      padding: 32px 28px; display: flex; flex-direction: column; min-height: 360px;
+      transition: transform .25s ease;
+    }
+    .ea-draw:hover { transform: translateY(-3px); }
+    .ea-draw.is-keynote-1 {
+      background: linear-gradient(135deg, #0a1628 0%, #1a2f56 100%);
+      color: #fff;
+    }
+    .ea-draw.is-keynote-2 {
+      background: linear-gradient(135deg, #1a2740 0%, #2a4570 100%);
+      color: #fff;
+    }
+    .ea-draw.is-breakfast {
+      background: var(--ea-yellow);
+      color: var(--ea-ink);
+    }
+    .ea-draw-pattern {
+      position: absolute; top: 0; right: 0; width: 200px; height: 200px;
+      opacity: 0.08; pointer-events: none;
+    }
+    .ea-draw-pattern svg { width: 100%; height: 100%; }
+    .ea-draw-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      margin-bottom: 12px; opacity: .8;
+    }
+    .ea-draw.is-breakfast .ea-draw-tag { opacity: .7; }
+    .ea-draw-tag::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor;
+    }
+    .ea-draw-when {
+      font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      opacity: .7; margin-bottom: 8px;
+    }
+    .ea-draw-title {
+      font-size: 22px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em;
+      margin: 0 0 16px; max-width: 18em;
+    }
+    .ea-draw-blurb {
+      font-size: 14px; line-height: 1.55; opacity: .85; margin: 0 0 20px;
+    }
+    .ea-draw.is-breakfast .ea-draw-blurb { opacity: .75; }
+    .ea-draw-speakers {
+      list-style: none; padding: 0; margin: 0 0 auto;
+      display: grid; gap: 8px; font-size: 13px;
+    }
+    .ea-draw-speakers li { display: flex; gap: 10px; line-height: 1.4; }
+    .ea-draw-speakers li::before {
+      content: ""; flex-shrink: 0; width: 18px; height: 18px; margin-top: 1px;
+      border-radius: 50%; background: rgba(255,255,255,.12);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffd200' stroke-width='2.5'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+      background-size: 12px; background-repeat: no-repeat; background-position: center;
+    }
+    .ea-draw.is-breakfast .ea-draw-speakers li::before {
+      background-color: rgba(10,22,40,.1);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a1628' stroke-width='2.5'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E");
+    }
+    .ea-draw-speakers strong { font-weight: 600; }
+    .ea-draw-speakers span { opacity: .7; }
+    .ea-draw-foot {
+      margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12);
+      font-size: 12px; opacity: .7; display: flex; justify-content: space-between; align-items: center;
+    }
+    .ea-draw.is-breakfast .ea-draw-foot { border-color: rgba(10,22,40,.15); opacity: .65; }
+    .ea-draw-foot-arrow {
+      font-size: 14px; opacity: 1; transition: transform .15s ease;
+    }
+    .ea-draw:hover .ea-draw-foot-arrow { transform: translateX(3px); }
+
+    /* ---------- Programme tracks ---------- */
+    .ea-tracks-head {
+      display: flex; justify-content: space-between; align-items: end;
+      gap: 24px; margin-bottom: 24px; flex-wrap: wrap;
+    }
+    .ea-tracks-groups {
+      display: grid; gap: 18px; width: 100%;
+    }
+    .ea-tracks-group {
+      display: grid; grid-template-columns: 200px 1fr; gap: 16px; align-items: start;
+    }
+    @media (max-width: 760px) {
+      .ea-tracks-group { grid-template-columns: 1fr; gap: 8px; }
+    }
+    .ea-tracks-group-flag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; border-radius: var(--ea-radius-lg);
+      font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      width: fit-content; white-space: nowrap;
+    }
+    .ea-tracks-group-flag::before {
+      content: ""; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    }
+    .ea-tracks-group-flag.is-flag-main {
+      background: var(--ea-ink); color: #fff;
+    }
+    .ea-tracks-group-flag.is-flag-main::before { background: var(--ea-yellow); }
+    .ea-tracks-group-flag.is-flag-l2 {
+      background: var(--ea-yellow); color: var(--ea-ink);
+    }
+    .ea-tracks-group-flag.is-flag-l2::before { background: var(--ea-ink); }
+    .ea-tracks-group-flag.is-flag-open {
+      background: var(--ea-bg-soft); color: var(--ea-ink-2); border: 1px solid var(--ea-line);
+    }
+    .ea-tracks-group-flag.is-flag-open::before { background: var(--ea-mute); }
+    .ea-tracks-group-flag.is-flag-free {
+      background: #e6f4ec; color: #1a6b3a; border: 1px solid #c5e3d0;
+    }
+    .ea-tracks-group-flag.is-flag-free::before { background: #1a6b3a; }
+
+    .ea-tracks-tabs {
+      display: inline-flex; padding: 4px; background: var(--ea-bg-soft);
+      border: 1px solid var(--ea-line); border-radius: var(--ea-radius-lg);
+      flex-wrap: wrap; gap: 2px;
+    }
+    .ea-track-tab {
+      padding: 8px 14px; border: 0; background: transparent; cursor: pointer;
+      font-size: 12px; font-weight: 600; color: var(--ea-mute);
+      border-radius: 6px; transition: all .15s ease; font-family: inherit;
+      letter-spacing: .04em;
+    }
+    .ea-track-tab:hover { color: var(--ea-ink); }
+    .ea-track-tab.is-active { background: var(--ea-ink); color: #fff; }
+
+    .ea-track-card {
+      background: var(--ea-bg-soft); border: 1px solid var(--ea-line);
+      border-radius: var(--ea-radius-lg); padding: 32px;
+      display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px;
+    }
+    @media (max-width: 800px) { .ea-track-card { grid-template-columns: 1fr; gap: 24px; padding: 24px; } }
+
+    .ea-track-meta-name {
+      font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .ea-track-chatham {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 12px; margin: 0 0 16px;
+      background: rgba(255,210,0,.12); border: 1px solid rgba(255,210,0,.4);
+      border-radius: var(--ea-radius-lg);
+      font-size: 12px; font-weight: 600; color: var(--ea-ink-2);
+      letter-spacing: .02em;
+    }
+    .ea-track-chatham svg { color: var(--ea-ink); flex-shrink: 0; }
+    .ea-track-icon {
+      width: 36px; height: 36px; border-radius: 8px; background: var(--ea-yellow);
+      display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .ea-track-icon svg { width: 18px; height: 18px; }
+    .ea-track-meta-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ea-mute); margin: 0 0 6px;
+    }
+    .ea-track-meta-text {
+      font-size: 14px; color: var(--ea-ink-2); margin: 0 0 20px; line-height: 1.55;
+    }
+    .ea-track-audience {
+      padding: 16px; background: #fff; border-radius: var(--ea-radius-lg);
+      border: 1px solid var(--ea-line);
+    }
+    .ea-track-audience .ea-track-meta-label { margin-bottom: 8px; }
+    .ea-track-audience p { margin: 0; font-size: 13px; color: var(--ea-ink-2); line-height: 1.5; }
+
+    .ea-track-sessions {
+      display: grid; gap: 12px;
+    }
+    .ea-track-session-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--ea-mute); margin: 0 0 4px;
+    }
+    .ea-session {
+      background: #fff; border: 1px solid var(--ea-line);
+      border-radius: var(--ea-radius-lg); padding: 18px 20px;
+      transition: all .15s ease;
+    }
+    .ea-session:hover { border-color: var(--ea-ink); box-shadow: var(--ea-shadow-sm); }
+    .ea-session-format {
+      display: inline-block; padding: 3px 8px; background: var(--ea-bg-soft);
+      border-radius: 4px; font-size: 10px; font-weight: 700;
+      letter-spacing: .08em; text-transform: uppercase; color: var(--ea-mute);
+      margin-bottom: 8px;
+    }
+    .ea-session-title {
+      font-size: 15px; font-weight: 700; margin: 0 0 6px; line-height: 1.3;
+      letter-spacing: -0.005em;
+    }
+    .ea-session-desc {
+      font-size: 13px; color: var(--ea-mute); margin: 0 0 10px; line-height: 1.5;
+    }
+    .ea-session-speakers {
+      font-size: 12px; color: var(--ea-ink-2); line-height: 1.5;
+    }
+    .ea-session-speakers strong { font-weight: 600; color: var(--ea-ink); }
+
+    /* ---------- Footer rail ---------- */
+    .ea-foot-rail {
+      margin-top: 40px; padding: 28px 32px;
+      background: var(--ea-navy); color: #fff; border-radius: var(--ea-radius-lg);
+      display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    .ea-foot-rail-text { display: flex; flex-direction: column; gap: 4px; }
+    .ea-foot-rail-title { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; }
+    .ea-foot-rail-sub { font-size: 13px; color: rgba(255,255,255,.7); }
+    .ea-btn {
+      display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+      padding: 14px 22px; border-radius: var(--ea-radius-lg); font-size: 14px; font-weight: 600;
+      font-family: inherit; border: 0; transition: all .15s ease; text-decoration: none;
+      white-space: nowrap;
+    }
+    .ea-btn-primary { background: var(--ea-yellow); color: var(--ea-ink); }
+    .ea-btn-primary:hover { background: #fff; transform: translateY(-1px); }
+    .ea-btn-arrow { transition: transform .15s ease; }
+    .ea-btn:hover .ea-btn-arrow { transform: translateX(3px); }
+  </style>
+
+  <!-- ===== HEADLINE DRAWS ===== -->
+  <div class="ea-section">
+    <div class="ea-wrap">
+      <div class="ea-section-head">
+        <div class="ea-eyebrow">Programme · 19–21 May 2026 · CTICC</div>
+        <h2 class="ea-h2">Three days. <em>Headline moments you can plan around.</em></h2>
+        <p class="ea-section-sub">Two ballroom keynotes and the P&amp;IN Business Breakfast — the set-piece sessions that frame the rest of the show.</p>
+      </div>
+
+      <div class="ea-draws">
+        <!-- KEYNOTE 1 -->
+        <article class="ea-draw is-keynote-1">
+          <div class="ea-draw-pattern">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" fill="none" stroke="#ffd200" stroke-width="0.5"/>
+              <circle cx="50" cy="50" r="30" fill="none" stroke="#ffd200" stroke-width="0.5"/>
+              <circle cx="50" cy="50" r="20" fill="none" stroke="#ffd200" stroke-width="0.5"/>
+              <circle cx="50" cy="50" r="2" fill="#ffd200"/>
+            </svg>
+          </div>
+          <span class="ea-draw-tag" style="color: var(--ea-yellow);">Day 1 Keynote</span>
+          <div class="ea-draw-when">19 May · Ballroom · 11:00–12:55</div>
+          <h3 class="ea-draw-title">Africa in the AI Age</h3>
+          <p class="ea-draw-blurb">A ministerial address, a deep dive on digital power from Huawei, and a captains-of-industry conversation on what AI really changes for African energy.</p>
+          <ul class="ea-draw-speakers">
+            <li><div><strong>Hon. Dr Kgosientsho Ramokgopa</strong><br><span>Minister of Electricity and Energy, South Africa</span></div></li>
+            <li><div><strong>David Sun</strong><br><span>VP &amp; CEO, Electric Power Digitalisation, Huawei</span></div></li>
+            <li><div><strong>Dan Marokane</strong><br><span>Group Chief Executive, Eskom</span></div></li>
+            <li><div><strong>Mike Teke</strong><br><span>CEO, Seriti</span></div></li>
+            <li><div><strong>Carol Koech</strong><br><span>CEO, GEAPP</span></div></li>
+          </ul>
+          <div class="ea-draw-foot">
+            <span>Ministerial address · panel · in-conversation</span>
+          </div>
+        </article>
+
+        <!-- KEYNOTE 2 -->
+        <article class="ea-draw is-keynote-2">
+          <div class="ea-draw-pattern">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 50 Q 30 30 50 50 T 90 50" fill="none" stroke="#ffd200" stroke-width="0.6"/>
+              <path d="M10 60 Q 30 40 50 60 T 90 60" fill="none" stroke="#ffd200" stroke-width="0.6"/>
+              <path d="M10 70 Q 30 50 50 70 T 90 70" fill="none" stroke="#ffd200" stroke-width="0.6"/>
+              <path d="M10 40 Q 30 20 50 40 T 90 40" fill="none" stroke="#ffd200" stroke-width="0.6"/>
+            </svg>
+          </div>
+          <span class="ea-draw-tag" style="color: var(--ea-yellow);">Day 2 Keynote</span>
+          <div class="ea-draw-when">20 May · Ballroom · 09:30–11:10</div>
+          <h3 class="ea-draw-title">The water–energy nexus, taken beyond theory</h3>
+          <p class="ea-draw-blurb">Two ministers, the Western Cape Premier, and the CEOs of Siemens SA and NVIDIA Africa lay out what coordinated water and energy planning actually looks like — and why siloed approaches are running out of road.</p>
+          <ul class="ea-draw-speakers">
+            <li><div><strong>Alan Winde</strong><br><span>Premier, Western Cape</span></div></li>
+            <li><div><strong>Hon. Pemmy Majodina</strong><br><span>Minister of Water and Sanitation, South Africa</span></div></li>
+            <li><div><strong>Sabine Dall'Omo</strong><br><span>CEO, Siemens South Africa</span></div></li>
+            <li><div><strong>Ahmed Sameh</strong><br><span>Head of Energy: MEA, NVIDIA</span></div></li>
+            <li><div><strong>Darshana Myronidis</strong><br><span>Global Sustainability Leader, Virgin Group UK</span></div></li>
+          </ul>
+          <div class="ea-draw-foot">
+            <span>Ministerial · industry · in-conversation</span>
+          </div>
+        </article>
+
+        <!-- BUSINESS BREAKFAST -->
+        <article class="ea-draw is-breakfast">
+          <div class="ea-draw-pattern">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <rect x="20" y="20" width="60" height="60" fill="none" stroke="#0a1628" stroke-width="0.6" transform="rotate(15 50 50)"/>
+              <rect x="25" y="25" width="50" height="50" fill="none" stroke="#0a1628" stroke-width="0.6" transform="rotate(30 50 50)"/>
+              <rect x="30" y="30" width="40" height="40" fill="none" stroke="#0a1628" stroke-width="0.6" transform="rotate(45 50 50)"/>
+            </svg>
+          </div>
+          <span class="ea-draw-tag">P&amp;IN Opener</span>
+          <div class="ea-draw-when">19 May · Ballroom · 07:00–09:30</div>
+          <h3 class="ea-draw-title">The Project &amp; Investment Network Business Breakfast</h3>
+          <p class="ea-draw-blurb">A fireside chat between Bruce Whitfield and Standard Bank's Chief Economist on what financiers are actually pricing — and which actions measurably improve fundability.</p>
+          <ul class="ea-draw-speakers">
+            <li><div><strong>Bruce Whitfield</strong><br><span>Business journalist &amp; best-selling author</span></div></li>
+            <li><div><strong>Goolam Ballim</strong><br><span>Chief Economist &amp; Head of Research, Standard Bank Group</span></div></li>
+          </ul>
+          <div class="ea-draw-foot">
+            <span>Keynote · fireside · breakfast</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PROGRAMME TRACKS ===== -->
+  <div class="ea-section">
+    <div class="ea-wrap">
+      <div class="ea-section-head">
+        <div class="ea-eyebrow">Programme tracks</div>
+        <h2 class="ea-h2">Thirteen tracks, <em>each tuned to a specific decision.</em></h2>
+        <p class="ea-section-sub">From the strategy room to the engineering bench. Tap a track to see who it's built for and a signature session.</p>
+      </div>
+
+      <div class="ea-tracks-head">
+        <div class="ea-tracks-tabs" role="tablist">
+          <button class="ea-track-tab is-active" data-track="strategise">Strategise</button>
+          <button class="ea-track-tab" data-track="innovate">Innovate</button>
+          <button class="ea-track-tab" data-track="pin">Project &amp; Investment Network</button>
+          <button class="ea-track-tab" data-track="ceo">Utility CEO Forum</button>
+          <button class="ea-track-tab" data-track="nuclear">Nuclear</button>
+          <button class="ea-track-tab" data-track="municipal">Municipal Forum</button>
+          <button class="ea-track-tab" data-track="rehub">RE Hub</button>
+          <button class="ea-track-tab" data-track="wsa">Water Security</button>
+          <button class="ea-track-tab" data-track="womenin">Women In Energy</button>
+          <button class="ea-track-tab" data-track="powerhub">Power Hub</button>
+          <button class="ea-track-tab" data-track="waterhub">Water Hub</button>
+          <button class="ea-track-tab" data-track="datacentres">Data Centres</button>
+          <button class="ea-track-tab" data-track="mobility">Mobility</button>
+        </div>
+      </div>
+
+      <div class="ea-track-card" id="ea-track-card"></div>
+
+      <!-- ===== Footer rail / CTA ===== -->
+      <div class="ea-foot-rail">
+        <div class="ea-foot-rail-text">
+          <span class="ea-foot-rail-title">200+ sessions. 260+ speakers. Three days.</span>
+          <span class="ea-foot-rail-sub">This is a teaser. The full programme has the timings, the rooms, and every speaker.</span>
+        </div>
+        <a href="#full-programme" class="ea-btn ea-btn-primary">View full programme <span class="ea-btn-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    const root = document.getElementById('ea-prog-teaser');
+
+    // Icon paths — neutral line icons for each track
+    const icons = {
+      strategise: '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M3 3v18h18M7 14l4-4 4 4 5-7"/></svg>',
+      innovate:   '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0012 2z"/></svg>',
+      pin:        '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2M3 12h2M19 12h2"/></svg>',
+      nuclear:    '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><circle cx="12" cy="12" r="2"/><ellipse cx="12" cy="12" rx="9" ry="3.5"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="9" ry="3.5" transform="rotate(120 12 12)"/></svg>',
+      municipal:  '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-5h6v5M9 12h.01M15 12h.01"/></svg>',
+      rehub:      '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>',
+      wsa:        '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M12 2.5C8 8 5 12 5 15a7 7 0 0014 0c0-3-3-7-7-12.5z"/></svg>',
+      mobility:   '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M5 17h14M3 13l2-6h14l2 6M3 13v4h2M21 13v4h-2M7 17v2M17 17v2M8 13h.01M16 13h.01"/></svg>',
+      ceo:        '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>',
+      womenin:    '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M12 12v6M9 16h6M8 22h8"/></svg>',
+      powerhub:   '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>',
+      waterhub:   '<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><path d="M3 12h2l2-4 4 8 4-8 2 4h4M3 18h18"/></svg>',
+      datacentres:'<svg viewBox="0 0 24 24" fill="none" stroke="#0a1628" stroke-width="2"><rect x="3" y="4" width="18" height="6" rx="1"/><rect x="3" y="14" width="18" height="6" rx="1"/><path d="M7 7h.01M7 17h.01M11 7h6M11 17h6"/></svg>'
+    };
+
+    // Track data — each pulled from the highlights doc + full programme
+    const tracks = {
+      strategise: {
+        name: 'Strategise',
+        icon: icons.strategise,
+        tier: 'main',
+        coverage: 'The "hard choices" track: finance and investment in core infrastructure, transmission bottlenecks, market design, regulatory reform, prosumer models and cross-border trade. Prioritises what unlocks delivery at scale, not theory.',
+        audience: 'Utility executives, regulators, policy leads, DFIs and banks, developers and advisors who need an implementable view of reform, investment conditions and grid build-out.',
+        sessions: [
+          {
+            format: 'In conversation',
+            title: 'Unlocking the grid — strategic solutions to the transmission bottleneck',
+            desc: 'Leaders from utilities, regulators and private investment unpack financial, technological and policy pathways to modernise and scale Africa\'s grid.',
+            speakers: '<strong>Jean Madzongwe</strong> (SAPP) · <strong>Keith Katyora</strong> (Energy Council SA) · <strong>Billy Onyango</strong> (Kenya Power) · <strong>Sameer Bagwandeen</strong> (Standard Bank)'
+          },
+          {
+            format: 'Fireside chat',
+            title: 'Independent Power Transmission (IPT): global lessons for Africa\'s grid',
+            desc: 'Where private investors build and operate high-voltage lines — dissecting the model\'s benefits, risks and financing structures.',
+            speakers: '<strong>Kipkemoi Kibias</strong> (CEO, Ketraco, Kenya) · <strong>Ziria Tibalwa Waako</strong> (CEO, ERA, Uganda) · <strong>Nicholas Msibi</strong> (Divisional CEO, ACTOM)'
+          }
+        ]
+      },
+      innovate: {
+        name: 'Innovate',
+        icon: icons.innovate,
+        tier: 'main',
+        coverage: 'Practical technology and system operations: flexible generation, grid resilience, storage, digitised utilities, data governance, AI use cases and technical readiness. Includes hands-on masterclass formats.',
+        audience: 'CTOs, system operators, engineers, innovation leads, utility transformation teams and credible tech partners focused on deployment realities.',
+        sessions: [
+          {
+            format: 'Panel',
+            title: 'Storage: from backup to system enabler — batteries, pumped hydro and LDES',
+            desc: 'Engineers explore how storage has evolved from emergency backup to critical grid flexibility — with deployment realities for BESS, pumped hydro and long-duration tech.',
+            speakers: '<strong>Raj Pandaram</strong> (NTCSA) · <strong>Oghosa Erhahon</strong> (LDES Council) · <strong>Tom Gebauer</strong> (CEO, Redoxone) · <strong>Trevor Govender</strong> (City of Cape Town)'
+          },
+          {
+            format: 'In conversation',
+            title: 'Navigating major grid disruptions: tech investments for real resilience',
+            desc: 'Battle-tested tools to limit damage and restart fast — grid hardening, FLISR, PMUs, BESS for blackstart, drone assessments.',
+            speakers: '<strong>Suleiman Babamanu</strong> (RMI Nigeria) · <strong>Sinosi Maliano</strong> (COO, Escom Malawi) · <strong>Marco Rahner</strong> (Siemens SA)'
+          }
+        ]
+      },
+      pin: {
+        name: 'Project & Investment Network',
+        icon: icons.pin,
+        tier: 'l2',
+        coverage: 'Investment-facing programming built around bankability and deal flow: business breakfast, ministerial dialogue, rapid-fire project briefings, "inside the deal" sessions plus investor and risk perspectives.',
+        audience: 'Investors, DFIs, banks, project sponsors, IPPs, developers, advisers and public sector stakeholders trying to move projects from pipeline to financial close.',
+        sessions: [
+          {
+            format: 'Panel',
+            title: 'Mobilising infrastructure debt: how credit guarantees drive bankability',
+            desc: 'How credit enhancement and guarantee vehicles bridge the gap between institutional capital and infrastructure debt.',
+            speakers: '<strong>Christopher Olobo</strong> (CEO, Dhamana Guarantee, Kenya) · <strong>Ojuru Adeniji</strong> (VP, InfraCredit Nigeria) · <strong>Jonathan First</strong> (Climate Policy Initiative)'
+          },
+          {
+            format: 'Panel',
+            title: 'Attracting long-term capital — the investor perspective on risk and return',
+            desc: 'How investors assess opportunities when state-owned enterprise off-takers face creditworthiness challenges.',
+            speakers: '<strong>Belinda Carreira</strong> (CEO, SustainableDNA) · <strong>Patrick Kouame</strong> (Investment Director, AIIM) · <strong>Zen Dlamini</strong> (Standard Bank) · <strong>Jacques Moulot</strong> (COO, A3E)'
+          }
+        ]
+      },
+      nuclear: {
+        name: 'Nuclear in Africa',
+        icon: icons.nuclear,
+        tier: 'open',
+        coverage: 'Nuclear reality check and execution pathway: African nuclear roadmap, grid suitability (large reactors vs SMRs), financing structures, supply chain localisation, legal frameworks, workforce and public acceptance.',
+        audience: 'Energy ministries, nuclear agencies, regulators, large utilities, investors considering nuclear risk and returns, plus industrial supply chain players assessing readiness.',
+        sessions: [
+          {
+            format: 'Panel',
+            title: 'Financing Africa\'s nuclear renaissance: unlocking private capital',
+            desc: 'How to get private money flowing into African nuclear before 2039 — first-project de-risking, local bank participation, DFI guarantees, and 20–30 year offtake structures.',
+            speakers: '<strong>Dr Stephen Yamoah</strong> (ED, Nuclear Power Ghana) · <strong>Solomon Quaynor</strong> (VP, AfDB) · <strong>Justus Wabuyabo</strong> (CEO, NuPEA, Kenya)'
+          },
+          {
+            format: 'Country spotlight',
+            title: 'The construction phase: Egypt\'s El Dabaa blueprint',
+            desc: 'Lessons from Africa\'s most advanced project — four 1.2 GW Gen III+ units under active build. Fast-track procurement, pragmatic localisation, integrated project management.',
+            speakers: '<strong>Sherif Helmy Mahmoud</strong> · Board Chairman, Nuclear Power Plants Authority (NPPA), Egypt'
+          }
+        ]
+      },
+      municipal: {
+        name: 'Municipal Forum',
+        icon: icons.municipal,
+        tier: 'open',
+        coverage: 'Distribution sector delivery: technical foundations for municipal energy systems, SAWEM readiness, reform implications, bankable municipal projects, tariffs and affordability, cost of supply, debt recovery, non-technical losses and informal settlement electrification.',
+        audience: 'Municipal executives, engineers, planners, CFOs, revenue teams, regulators and reform programme leaders plus financiers and solution providers working in distribution.',
+        sessions: [
+          {
+            format: 'Fishbowl',
+            title: 'The technocrats: building technical foundations for resilient municipal energy systems',
+            desc: 'Interactive rotating-speaker format on metering for wheeling, demand response procurement and municipal technical skill development.',
+            speakers: '<strong>Alderman Xanthia Limberg</strong> (City of Cape Town) · <strong>Eliphas Kahorere</strong> (City of Windhoek) · <strong>Nwabisa Njoli</strong> (Eskom) · <strong>Marco Rahner</strong> (Siemens)'
+          },
+          {
+            format: 'Panel',
+            title: 'Municipal utilities in the SAWEM era',
+            desc: 'What market liberalisation means in practice — trading participation, operational readiness, and how municipalities position for a competitive future.',
+            speakers: '<strong>Onicah Rantwane</strong> (Eskom Trading) · <strong>Muzi Mkhize</strong> (NERSA) · <strong>Lebogang Mojanaga</strong> (DEE) · <strong>Gordon Dindi</strong> (City of Cape Town)'
+          }
+        ]
+      },
+      rehub: {
+        name: 'Renewable Energy Hub',
+        icon: icons.rehub,
+        tier: 'open',
+        coverage: 'Grid integration and system stability for high-VRE futures: inertia and stability, open access regulation, modelling variable generation, hybrid plants, BESS and pumped storage, C&I project implementation, voluntary carbon markets, minigrids and black start.',
+        audience: 'System operators, grid planners, IPPs, developers, storage players, regulators, C&I energy leads and technical investors.',
+        sessions: [
+          {
+            format: 'Panel',
+            title: 'Open access: regulatory lessons, market reform and future direction',
+            desc: 'Striking the balance between competition, investment attraction and system reliability across emerging African power markets.',
+            speakers: '<strong>David Mvura</strong> (MATTLA Engineering) · <strong>Kandali Iyambo</strong> (NamPower) · <strong>Andrew Taylor</strong> (NOA) · <strong>Mbiko Banda</strong> (Africa GreenCo)'
+          },
+          {
+            format: 'In conversation',
+            title: 'The evolving voluntary carbon market: navigating change, policy and opportunity',
+            desc: 'Bundled vs unbundled renewable energy transactions and what they mean for corporate reporting, emissions claims and contractual structures.',
+            speakers: '<strong>Robbie Louw</strong> (Promethium Carbon) · <strong>Kumesh Naidoo</strong> (DBSA) · <strong>Olivia Rumble</strong> (Climate Legal)'
+          }
+        ]
+      },
+      wsa: {
+        name: 'Water Security Africa',
+        icon: icons.wsa,
+        tier: 'open',
+        coverage: 'High-level water resilience and finance: utility collaboration lab, mobilisation of climate finance for water, regulatory bottlenecks, reuse and recovery innovation, stewardship models in high-consumption industries, country playbooks and catchment-level risk.',
+        audience: 'Water utilities, public sector water leaders, DFIs and climate funds, banks, large industrial water users and policy and regulatory stakeholders.',
+        sessions: [
+          {
+            format: 'Panel',
+            title: 'Mobilising climate finance for water resilience',
+            desc: 'Why only 3% of climate finance reaches water — what\'s blocking adaptation projects, which funds are disbursing today, and how to de-risk water projects fast.',
+            speakers: '<strong>Bothwell Manikai</strong> (DBSA) · <strong>Dr Faycel Chenini</strong> (INRGREF Tunisia) · <strong>Amgad Elmahdi</strong> (Green Climate Fund) · <strong>Joel Buatre</strong> (Standard Bank)'
+          },
+          {
+            format: 'Country spotlight',
+            title: 'South Africa: policy alignment and regulatory interventions',
+            desc: 'Tariff certainty, decentralised systems, fast-tracking licensing — and which three regulatory changes could unlock the most private investment by 2030.',
+            speakers: '<strong>Benoît Le Roy</strong> (SA Water Chamber) · <strong>Ntombizanele Billa-Mupariwa</strong> (DWS Western Cape) · <strong>Bashan Govender</strong> (Sibanye Stillwater)'
+          }
+        ]
+      },
+      mobility: {
+        name: 'Mobility',
+        icon: icons.mobility,
+        tier: 'free',
+        coverage: 'Electrification of transport systems: public transport electrification pathways, charging infrastructure, grid readiness, rail integration, NEVs and private sector fleet electrification plus the battery ecosystem and circular economy.',
+        audience: 'City transport authorities, fleet operators, utilities serving transport loads, charging and infrastructure providers, policymakers and investors tracking EV market development.',
+        sessions: [
+          {
+            format: 'Panel',
+            title: 'Africa\'s EV market: unlocking growth and industrial opportunity',
+            desc: 'EV adoption trends in South Africa and across the continent, policy momentum, incentives, and the local manufacturing value chain.',
+            speakers: '<strong>Nathan Fredericks</strong> (Programme Director NEV, IDC) · <strong>Dr Bradon Doveren</strong> (NEV, IDC) · <strong>Sithobile Khoza</strong> (GreenCape)'
+          },
+          {
+            format: 'Panel',
+            title: 'Fleet electrification: logistics, mining and corporate mobility',
+            desc: 'Electrifying delivery and logistics, EVs in mining and heavy industry, ESG and cost drivers for corporates.',
+            speakers: '<strong>Jonathan Mphake</strong> (National Fleet Manager, SBV) · <strong>Ndia Magadagela</strong> (Co-Founder, Everlectric) · <strong>Rita Naude</strong> (GreenCape)'
+          }
+        ]
+      },
+      ceo: {
+        name: 'Utility CEO Forum',
+        icon: icons.ceo,
+        tier: 'l2',
+        chathamHouse: true,
+        coverage: 'A closed-door, three-day forum bringing African utility CEOs and IPP leaders together with curated expert partners. Deep, candid discussions on the most pressing strategic, financial and operational issues facing African utilities — held under Chatham House Rules.',
+        audience: 'Utility CEOs, IPP leaders and senior expert-partner sponsors. By invitation only — no media or press are admitted to forum sessions.',
+        sessions: [
+          {
+            format: 'Closed door · Chatham House',
+            title: 'CEO Forum sessions across all three days',
+            desc: 'The CEO Forum runs as a closed-door programme on Level 2 across the full event, including a private CEO Cape Town tour, the CEO Forum Dinner, and joint networking with the Project & Investment Network. Specific session topics are shared with confirmed attendees only.',
+            speakers: 'Attendance by invitation. <strong>Apply via the sponsorship team</strong> to be considered for a delegate seat or expert-partner role.'
+          }
+        ]
+      },
+      womenin: {
+        name: 'Women In Energy, Water & Mobility',
+        icon: icons.womenin,
+        tier: 'open',
+        coverage: 'Leadership and equity outcomes across the sectors: practical levers for high-performance teams, equity in practice and structured roundtable discussions focused on what actually shifts representation and progression.',
+        audience: 'Senior leaders and emerging leaders across the ecosystem, HR and organisational effectiveness leads and allies who want practical, non-performative approaches to leadership and inclusion.',
+        sessions: [
+          {
+            format: 'Roundtables',
+            title: 'Practical levers for representation, progression and high-performance teams',
+            desc: 'Structured peer roundtables focused on what actually shifts the dial — moving past performative conversations into the day-to-day mechanics of equitable team building.',
+            speakers: 'Speakers and chairs to be announced. <strong>Watch the full programme for updates.</strong>'
+          }
+        ]
+      },
+      powerhub: {
+        name: 'Power Hub',
+        icon: icons.powerhub,
+        tier: 'free',
+        coverage: 'Applied utility capability and supplier ecosystem content: grid and infrastructure resilience, smart metering and interoperability, digital twins, protection engineering, operational tooling plus supply chain resilience and generation topics.',
+        audience: 'Utility practitioners, OEMs and EPCs, technical service providers, operations and maintenance teams, procurement and engineering management.',
+        sessions: [
+          {
+            format: 'Case study',
+            title: 'Changes in circuit breaker testing philosophy based on circuit breaker failures',
+            desc: 'Practical reassessment of circuit breaker testing protocols informed by recent in-field failure data — directly applicable to operational and maintenance teams.',
+            speakers: '<strong>David Bavin</strong> · Senior Application Manager, Megger Africa'
+          },
+          {
+            format: 'Presentation',
+            title: 'Integrated e-waste recycling and lithium-iron battery manufacturing for a circular economy',
+            desc: 'How African lithium-iron battery manufacturing combined with e-waste recycling can build a continental circular economy in energy storage.',
+            speakers: '<strong>Hendrick Tafadzwa Chickwaha</strong> · CEO &amp; Co-Founder, Relithia Energy'
+          }
+        ]
+      },
+      waterhub: {
+        name: 'Water Hub',
+        icon: icons.waterhub,
+        tier: 'free',
+        coverage: 'Practitioner-focused water operations and technology: utility performance, treatment technologies, leak detection, smart metering and revenue management, desalination and reuse, leadership and resilience and digital tools for utilities.',
+        audience: 'Water utility operations teams, municipal engineers, technology providers, maintenance and asset management leads and implementation partners.',
+        sessions: [
+          {
+            format: 'Technical discussion',
+            title: 'Leak detection technologies for large distribution networks',
+            desc: 'Satellite leak detection, network monitoring systems and pressure management — practical deployment realities from one of the continent\'s most water-stressed metros.',
+            speakers: '<strong>Ivy Maisela</strong> (Head: Water Demand, City of Cape Town) · <strong>Etienne Hugo</strong> (Director: Distribution Services, City of Cape Town) · <strong>Siya Bashe</strong> (Director: Commercial Services, City of Cape Town)'
+          },
+          {
+            format: 'Case study',
+            title: 'Smart water metering: residential and institutional implementation',
+            desc: 'A working case study from Drakenstein Local Municipality on residential and institutional smart-meter rollout.',
+            speakers: '<strong>Hilton Smith</strong> (Drakenstein Local Municipality) · <strong>Ithriam Leukes</strong> (Water Solutions Specialist, Ontec)'
+          }
+        ]
+      },
+      datacentres: {
+        name: 'Data Centres',
+        icon: icons.datacentres,
+        tier: 'free',
+        coverage: 'The digital backbone agenda: data sovereignty, capacity gaps, financing the data-centre buildout, water and cooling constraints, energy security for 24/7 loads, hyperscaler dynamics and ESG-aligned financing models.',
+        audience: 'Data-centre operators and investors, hyperscaler partners, utilities serving digital-infrastructure loads, financiers, sustainability leads and policymakers shaping data-localisation rules.',
+        sessions: [
+          {
+            format: 'Panel',
+            title: 'The digital gold rush — from data export to data ownership',
+            desc: 'Data localisation as a demand signal, Africa\'s capacity gap, avoiding the extractive digital economy model, and where regional data hubs are emerging.',
+            speakers: '<strong>Shaun Versfeld</strong> · Associate Director, Atana, South Africa'
+          },
+          {
+            format: 'Masterclass',
+            title: 'Financing the digital backbone — capital, risk and bankability',
+            desc: 'An investor-grade deep dive into what makes a data-centre project financeable in African markets — capital diversity, the occupancy gap, hyperscaler tenant vs investor dynamics.',
+            speakers: 'Facilitator: <strong>Julia Power</strong> · Partner, Bowmans Law'
+          }
+        ]
+      }
+    };
+
+    const cardEl = document.getElementById('ea-track-card');
+
+    const tierLabels = {
+      main: 'Main Conference',
+      l2: 'Level 2 · By invitation',
+      open: 'Open Programme',
+      free: 'Free to Attend'
+    };
+    const tierFlagClass = {
+      main: 'is-flag-main',
+      l2: 'is-flag-l2',
+      open: 'is-flag-open',
+      free: 'is-flag-free'
+    };
+
+    function renderTrack(key) {
+      const t = tracks[key];
+      const flag = `<span class="ea-tracks-group-flag ${tierFlagClass[t.tier]}" style="margin-bottom: 16px;">${tierLabels[t.tier]}</span>`;
+      const chatham = t.chathamHouse
+        ? `<div class="ea-track-chatham"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg> Chatham House Rules apply · no media or press</div>`
+        : '';
+      cardEl.innerHTML = `
+        <div class="ea-track-meta">
+          ${flag}
+          <h3 class="ea-track-meta-name">
+            <span class="ea-track-icon">${t.icon}</span>
+            ${t.name}
+          </h3>
+          ${chatham}
+          <p class="ea-track-meta-label">Coverage &amp; focus</p>
+          <p class="ea-track-meta-text">${t.coverage}</p>
+          <div class="ea-track-audience">
+            <p class="ea-track-meta-label">Who it's for</p>
+            <p>${t.audience}</p>
+          </div>
+        </div>
+        <div class="ea-track-sessions">
+          <p class="ea-track-session-label">Signature sessions</p>
+          ${t.sessions.map(s => `
+            <div class="ea-session">
+              <span class="ea-session-format">${s.format}</span>
+              <h4 class="ea-session-title">${s.title}</h4>
+              <p class="ea-session-desc">${s.desc}</p>
+              <p class="ea-session-speakers">${s.speakers}</p>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // Wire up tabs
+    root.querySelectorAll('.ea-track-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        root.querySelectorAll('.ea-track-tab').forEach(t => t.classList.remove('is-active'));
+        tab.classList.add('is-active');
+        renderTrack(tab.dataset.track);
+      });
+    });
+
+    // Init
+    renderTrack('strategise');
+  })();
+  </script>
+</section>
